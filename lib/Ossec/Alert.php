@@ -51,12 +51,12 @@ class Ossec_Alert {
 
         $srcip = "";
         if( $this->srcip != '(none)' && $this->srcip != "") {
-            $srcip = "<div class=\"alertindent\">Src IP: </div>{$this->srcip}<br/>";
+            $srcip = "<div class=\"alertindent\">ソース IP: </div>{$this->srcip}<br/>";
         }
 
         $user = "";
         if( $this->user != '') {
-            $user = "<div class=\"alertindent\">User: </div>{$this->user}<br/>";
+            $user = "<div class=\"alertindent\">ユーザ: </div>{$this->user}<br/>";
         }
 
         $class = "level_{$this->level} id_{$this->id} srcip_{$this->srcip}";
