@@ -92,7 +92,7 @@ function __os_getdb($file, $_name)
     /* Printing latest files */
     echo '
          <br /><br />
-         <h2>Latest modified files:</h2><br />
+         <h2>最近変更されたファイル:</h2><br />
          ';
     arsort($mod_list);
     foreach ($mod_list as $mod_date => $val)
@@ -103,7 +103,7 @@ function __os_getdb($file, $_name)
              ';   
     }
     
-    echo "\n<br /><h2>Integrity Checking database: $_name</h2>\n";
+    echo "\n<br /><h2>整合性チェック・データベース: $_name</h2>\n";
     
 
     /* Printing db */
