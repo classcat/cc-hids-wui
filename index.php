@@ -66,14 +66,15 @@ if(isset($_GET['f'])) {
 <!-- BEGIN: content -->
 <?php
       $array_lib = array("ossec_conf.php",
+			 "lib/ossec_categories.php",
+			 "lib/ossec_formats.php",  
 			 "lib/os_lib_handle.php",
 			 "lib/os_lib_agent.php",
 			 "lib/os_lib_syscheck.php",
 			 "lib/os_lib_alerts.php",
 			 );
       /*
-	$array_lib = array("ossec_conf.php", "lib/ossec_categories.php",
-                          "lib/ossec_formats.php",  
+	$array_lib = array(
                           "lib/os_lib_mapping.php",
                           "lib/os_lib_stats.php",
                           "lib/os_lib_firewall.php",
@@ -106,6 +107,13 @@ switch ($USER_f)
                     return(1);
                 }
 			   break;
+
+  case "s": // Search
+    if(!include("site/search.php")) {
+      echo "$int_error";
+      return(1);
+    }
+    break;
 
   case "a": // About
     if(!include("site/help.php")) {
