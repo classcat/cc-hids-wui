@@ -99,13 +99,31 @@ if(!os_check_config($ossec_dir, $ossec_max_alerts_per_page,
 switch ($USER_f) 
   {
 
-  case "m":
+  case "m": // main
                 if(!include("site/main.php"))
                 {
                     echo "$int_error";
                     return(1);
                 }
 			   break;
+
+  case "a": // About
+    if(!include("site/help.php")) {
+	echo "$int_error";
+	return(1);
+      }
+    break;
+
+  case "i": // integrity check
+    if(!include("site/syscheck.php")) {
+      echo "$int_error";
+      return(1);
+    }
+    break;
+
+  default:
+    echo '<b class="red">Invalid argument.</b>';
+    return(1);
 
   }
 
