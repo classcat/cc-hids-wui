@@ -70,13 +70,13 @@ if(isset($_GET['f'])) {
 			 "lib/ossec_formats.php",  
 			 "lib/os_lib_handle.php",
 			 "lib/os_lib_agent.php",
+			 "lib/os_lib_stats.php",
 			 "lib/os_lib_syscheck.php",
 			 "lib/os_lib_alerts.php",
 			 );
       /*
 	$array_lib = array(
                           "lib/os_lib_mapping.php",
-                          "lib/os_lib_stats.php",
                           "lib/os_lib_firewall.php",
 
 );
@@ -110,6 +110,13 @@ switch ($USER_f)
 
   case "s": // Search
     if(!include("site/search.php")) {
+      echo "$int_error";
+      return(1);
+    }
+    break;
+
+  case "t": // Stats
+    if(!include("site/stats.php")) {
       echo "$int_error";
       return(1);
     }
