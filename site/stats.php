@@ -102,42 +102,34 @@ else
 
 
 /* Day option */
-echo "<h2>Stats options:</h2><br />\n";
+echo "<h2>統計オプション:</h2><br />\n";
 echo '
 
-<form name="dosearch" method="post" action="index.php?f=t">
+<form name="dosearch" method="post" action="index.php?f=t">';
 
-Day:  <select name="day" class="formSelect">
-    <option value="0">All days</option>
-';
-for($l_counter = 1; $l_counter <= 31 ; $l_counter++)
-{
-    $tmp_msg = '';
-    if($l_counter == $USER_day)
-    {
-        $tmp_msg = ' selected="selected"';
-    }
-    echo '   <option value="'.$l_counter.'"'.$tmp_msg.'>'.
-         $l_counter.'</option>';
-}
-echo '  </select>';
-
+/* Year */
+echo '<select name="year" class="formSelect">
+    <option value="'.$curr_year.'" selected="selected">'.$curr_year.'</option>
+    <option value="'.($curr_year-1).'">'.($curr_year-1).'</option>
+    <option value="'.($curr_year-2).'">'.($curr_year-2).'</option>
+    ';
+echo '  </select> 年 ';
 
 /* Monthly */
-echo ' Month: <select name="month" class="formSelect">
+echo '<select name="month" class="formSelect">
     ';
-$months = array("January" => "Jan", 
-                "February" => "Feb", 
-                "March" => "Mar", 
-                "April" => "Apr", 
-                "May" => "May",
-                "June" => "Jun",
-                "July" => "Jul", 
-                "August" => "Aug", 
-                "September" => "Sep", 
-                "October" => "Oct", 
-                "November" => "Nov", 
-                "December" => "Dec");
+$months = array("1" => "Jan", 
+                "2" => "Feb", 
+                "3" => "Mar", 
+                "4" => "Apr", 
+                "5" => "May",
+                "6" => "Jun",
+                "7" => "Jul", 
+                "8" => "Aug", 
+                "9" => "Sep", 
+                "10" => "Oct", 
+                "11" => "Nov", 
+                "12" => "Dec");
 $mnt_ct = 1;
 foreach($months as $tmp_month => $tmp_month_v)
 {
@@ -152,16 +144,25 @@ foreach($months as $tmp_month => $tmp_month_v)
     }
     $mnt_ct++;
 }
-echo '  </select>';
+echo '  </select> 月 ';
 
+echo '<select name="day" class="formSelect">
+    <option value="0">All days</option>
+';
+for($l_counter = 1; $l_counter <= 31 ; $l_counter++)
+{
+    $tmp_msg = '';
+    if($l_counter == $USER_day)
+    {
+        $tmp_msg = ' selected="selected"';
+    }
+    echo '   <option value="'.$l_counter.'"'.$tmp_msg.'>'.
+         $l_counter.'</option>';
+}
+echo '  </select> 日 ';
 
-/* Year */
-echo ' Year: <select name="year" class="formSelect">
-    <option value="'.$curr_year.'" selected="selected">'.$curr_year.'</option>
-    <option value="'.($curr_year-1).'">'.($curr_year-1).'</option>
-    <option value="'.($curr_year-2).'">'.($curr_year-2).'</option>
-    ';
-echo '  </select> <input type="submit" name="Stats" value="Change options" class="button" /></form>';
+echo '  <button type="submit" name="Stats" value="Change options" class="button" />オプション変更</button></form>';
+// echo '  <input type="submit" name="Stats" value="Change options" class="button" /></form>';
 
 
 
@@ -192,22 +193,22 @@ else
 /* Day 0 == month stats */
 if($USER_day == 0)
 {
-    echo "<h2>Ossec Stats for: <b id='blue'>".$l_year_month."</b></h2><br />\n";
+    echo "<h2>統計情報 for: <b id='blue'>".$l_year_month."</b></h2><br />\n";
 }
 else
 {
-    echo "<h2>Ossec Stats for: <b id='blue'>".$l_year_month.
+    echo "<h2>統計情報 for: <b id='blue'>".$l_year_month.
          "/".$USER_day."</b> </h2><br /><br />\n\n";
 }
 
-echo '<b>Total</b>: '.number_format($daily_stats{'total'}).'<br />';
-echo '<b>Alerts</b>: '.number_format($daily_stats{'alerts'}).'<br />';
+echo '<b>総計</b>: '.number_format($daily_stats{'total'}).'<br />';
+echo '<b>アラート</b>: '.number_format($daily_stats{'alerts'}).'<br />';
 echo '<b>Syscheck</b>: '.number_format($daily_stats{'syscheck'}).'<br />';
 echo '<b>Firewall</b>: '.number_format($daily_stats{'firewall'}).'<br />';
 if($USER_day != 0)
 {
     (int)$h_avg = (int)$daily_stats{'total'}/24;
-    echo '<b>Average</b>: '.sprintf("%.01f", $h_avg).' events per hour.';
+    echo '<b>平均</b>: '.sprintf("%.01f", $h_avg).' イベント/時間';
 }
 
 echo '<br /><br />';
@@ -216,7 +217,7 @@ echo '
 <table align="center"><tr valign="top"><td width="50%">
 
 <table summary="Total values">
-    <caption><strong>Aggregate values by severity</strong></caption>
+    <caption><strong>重要度（レベル）による集計値</strong></caption>
     <tr>
     <th>Option</th>
     <th>Value</th>
@@ -277,7 +278,7 @@ echo '
 
 <td width="50%">
 <table summary="Total values">
-    <caption><strong>Aggregate values by rule</strong></caption>
+    <caption><strong>ルールによる集計値</strong></caption>
     <tr>
     <th>Option</th>
     <th>Value</th>
@@ -340,7 +341,7 @@ echo '
 
         <br /><br />
         <table align="center" summary="Total by day">
-        <caption><strong>Total values per Day</strong></caption>
+        <caption><strong>1日毎の合計</strong></caption>
         <tr>
         <th>Day</th>
         <th>Alerts</th>
@@ -418,7 +419,7 @@ else
 
         <br /><br />
         <table align="center" summary="Total by hour">
-        <caption><strong>Total values per hour</strong></caption>
+        <caption><strong>1時間毎の合計</strong></caption>
         <tr>
         <th>Hour</th>
         <th>Alerts</th>
