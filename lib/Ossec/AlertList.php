@@ -107,19 +107,22 @@ class Ossec_AlertList {
         $last  = date('Y M d H:i:s', $last->time ); ?>
 
         <div id="alert_list_nav">
-            <?php echo $this->_tallyNav( $this->_level_histogram, 'level', 'severity' , '+Severity breakdown' ) ?>
-            <?php echo $this->_tallyNav( $this->_id_histogram   , 'id'   , 'rule'     , '+Rules breakdown'    ) ?>
-            <?php echo $this->_tallyNav( $this->_srcip_histogram, 'srcip', 'Source IP', '+Src IP breakdown'   ) ?>
+            <?php echo $this->_tallyNav( $this->_level_histogram, 'level', 'severity' , '+重要度（レベル）ブレークダウン' ) ?>
+            <?php echo $this->_tallyNav( $this->_id_histogram   , 'id'   , 'rule'     , '+ルール ブレークダウン'    ) ?>
+            <?php echo $this->_tallyNav( $this->_srcip_histogram, 'srcip', 'Source IP', '+ソース IP ブレークダウン'   ) ?>
+            <?php // echo $this->_tallyNav( $this->_level_histogram, 'level', 'severity' , '+Severity breakdown' ) ?>
+            <?php // echo $this->_tallyNav( $this->_id_histogram   , 'id'   , 'rule'     , '+Rules breakdown'    ) ?>
+            <?php // echo $this->_tallyNav( $this->_srcip_histogram, 'srcip', 'Source IP', '+Src IP breakdown'   ) ?>
         </div>
         <br />
 
         <table width="100%">
-            <tr><td><b>First event</b> at <a href="#lt"><?php echo $first ?></a></td></tr>
-            <tr><td><b>Last event</b> at <a href="#ft"><?php echo $last ?></a></td></tr>
+            <tr><td><b>最初のイベント</b> at <a href="#lt"><?php echo $first ?></a></td></tr>
+            <tr><td><b>最後のイベント</b> at <a href="#ft"><?php echo $last ?></a></td></tr>
         </table>
         <br />
 
-        <h2>Alert list</h2>
+        <h2>アラート・リスト</h2>
         <div id="alert_list_content">
             <a name="ft" ></a>
             <?php foreach( array_reverse($this->_alerts) as $alert ): ?>
@@ -218,13 +221,13 @@ class Ossec_AlertList {
                 <div class="asmall details" style="display:none">
                     <?php foreach($tally as $id => $count): ?>
                         <div id="showing_<?php echo $key ?>_<?php echo $id ?>" class="asmall">
-                            Showing <?php echo $count ?> alert(s) from <b><?php echo $key ?> <?php echo $id ?></b>
-                            <a href="#" class="asmall hide <?php echo $key ?>_<?php echo $id ?>" title="Hide this <?php echo $key ?>">(hide)</a>
+                            <?php echo $count ?> アラートを表示 from <b><?php echo $key ?> <?php echo $id ?></b>
+                            <a href="#" class="asmall hide <?php echo $key ?>_<?php echo $id ?>" title="Hide this <?php echo $key ?>">(非表示にする)</a>
                             <a href="#" class="asmall only <?php echo $key ?>_<?php echo $id ?>" title="Show only this <?php echo $key ?>">(show only)</a>
                         </div>
                         <div id="hiding_<?php echo $key ?>_<?php echo $id ?>" class="asmall" style="display:none;">
-                            Hiding <?php echo $count ?> alert(s) from <b><?php echo $key ?> <?php echo $id ?></b>
-                            <a href="#" class="asmall show <?php echo $key ?>_<?php echo $id ?>" title="Hiding <?php echo $key ?>">(show)</a>
+                            <?php echo $count ?> アラートを非表示 from <b><?php echo $key ?> <?php echo $id ?></b>
+                            <a href="#" class="asmall show <?php echo $key ?>_<?php echo $id ?>" title="Hiding <?php echo $key ?>">(表示する)</a>
                         </div>
                     <?php endforeach; ?>
                     <a href="#" class="asmall clear <?php echo $key ?>" title="Clear <?php echo $description ?> restrictions">Clear <?php echo $key ?> restrictions</a>

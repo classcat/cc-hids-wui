@@ -566,7 +566,8 @@ if($output_list[0]{'pg'} > 1)
                class="formText" />
          ';
 
-    echo 'Page <b>'.$USER_page.'</b> ('.$output_list[0]{$real_page}.' alerts)';
+    echo '<b>'.$USER_page.'</b> ページ ('.$output_list[0]{$real_page}.' アラート)';
+    // echo 'Page <b>'.$USER_page.'</b> ('.$output_list[0]{$real_page}.' alerts)';
 }
 
 /* Currently page */
