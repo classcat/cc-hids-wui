@@ -147,11 +147,16 @@ else
            }
            
            /* Setting the date */
-           if($last_mod_date != date('Y M d', $syscheck[0]))
+           if($last_mod_date != date('m/d/Y', $syscheck[0]))
+           {
+               $last_mod_date = date('m/d/Y', $syscheck[0]);
+               echo "\n<br /><b>$last_mod_date</b><br />\n";
+           }
+           /* if($last_mod_date != date('Y M d', $syscheck[0]))
            {
                $last_mod_date = date('Y M d', $syscheck[0]);
                echo "\n<br /><b>$last_mod_date</b><br />\n";
-           }
+	       } */
            
            echo '
                <span id="togglesk'.$sk_count.'">
